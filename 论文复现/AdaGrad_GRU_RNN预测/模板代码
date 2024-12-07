@@ -1,0 +1,229 @@
+import pandas as pd
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import matplotlib.pyplot as plt
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+import plotly.graph_objs as go
+import plotly.offline as pyo
+
+# 1. 加载数据
+data = pd.read_csv('total_load_actual.csv')
+
+# 2. 检查数据是否包含 NaN
+if data.isnull().any().any():
+    print("Data contains NaN values. Filling missing values...")
+    data = data.fillna(method='ffill')  # 使用前值填充缺失数据
+
+# 3. 将数据列转换为字典格式
+data_dict = {}
+for col in data.columns:
+    data_dict[col] = data[col].tolist()
+
+total_acual_load_list = data_dict['total load actual']
+
+# 4. 归一化数据
+scaler = MinMaxScaler(feature_range=(0, 1))
+total_acual_load_list_scaled = scaler.fit_transform(np.array(total_acual_load_list).reshape(-1, 1)).flatten()
+
+# 5. 设定序列长度和样本数
+seq_length = 24
+num_samples = len(total_acual_load_list_scaled) - seq_length
+
+# 6. 初始化输入和输出数据
+x_processed = []
+y_processed = []
+for i in range(num_samples):
+    x_processed.append(total_acual_load_list_scaled[i:i+seq_length-1])
+    y_processed.append(total_acual_load_list_scaled[i+seq_length])
+
+# 7. 打乱数据
+indices = np.arange(len(x_processed))
+np.random.shuffle(indices)
+x_processed = [x_processed[i] for i in indices]
+y_processed = [y_processed[i] for i in indices]
+
+# 8. 转换为Tensor
+x_processed_tensor = torch.tensor(x_processed, dtype=torch.float32)
+y_processed_tensor = torch.tensor(y_processed, dtype=torch.float32).reshape(-1, 1)
+
+# 9. 数据形状检查：确保 x_processed_tensor 的形状为 (样本数量, 序列长度-1, 输入维度)
+x_processed_tensor = x_processed_tensor.unsqueeze(-1)  # 将输入扩展为三维张量 (样本数量, seq_length-1, input_dim)
+
+# 10. 数据划分：80% 训练集，20% 测试集 使用 train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x_processed_tensor, y_processed_tensor, test_size=0.2, random_state=42)
+
+# 11. 定义前馈神经网络（BP神经网络）
+class MLP(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim):
+        super(MLP, self).__init__()
+        self.fc1 = nn.Linear(input_dim, hidden_dim)  # 第一层，全连接层
+        self.fc2 = nn.Linear(hidden_dim, hidden_dim)  # 第二层，全连接层
+        self.fc3 = nn.Linear(hidden_dim, output_dim)  # 输出层
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))  # ReLU激活函数
+        x = torch.relu(self.fc2(x))  # ReLU激活函数
+        x = self.fc3(x)  # 输出层
+        return x
+
+# 12. 定义模型
+input_dim = seq_length - 1  # 输入维度（序列长度减去1）
+hidden_dim = 16
+output_dim = 1
+model = MLP(input_dim, hidden_dim, output_dim)
+
+# 13. 定义损失函数和优化器
+criterion = nn.MSELoss()
+optimizer = optim.Adagrad(model.parameters(), lr=0.001)
+
+# 14. 训练模型
+num_epochs = 10000
+train_loss = []
+
+for epoch in range(num_epochs):
+    model.train()
+    optimizer.zero_grad()
+    output = model(x_train.squeeze(-1))  # 去掉最后一个维度以适应输入
+    loss = criterion(output, y_train)
+    loss.backward()
+    optimizer.step()
+    
+    train_loss.append(loss.item())
+    if (epoch+1) % (num_epochs//10) == 0:
+        print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+# 15. 测试模型
+model.eval()
+with torch.no_grad():
+    predicted = model(x_test.squeeze(-1)).cpu().numpy()
+
+# 16. 反归一化预测结果
+predicted_original_scale = scaler.inverse_transform(predicted)
+y_test_original_scale = scaler.inverse_transform(y_test.cpu().numpy())
+
+# 17. 计算均方误差
+# MSE MAE MAPE RMSE R^2 LOG_LOSS sMAPE
+mse = mean_squared_error(y_test_original_scale, predicted_original_scale)
+mae = np.mean(np.abs(y_test_original_scale - predicted_original_scale))
+mape = np.mean(np.abs((y_test_original_scale - predicted_original_scale) / y_test_original_scale)) * 100
+rmse = np.sqrt(mse)
+r2 = 1 - (np.sum((y_test_original_scale - predicted_original_scale) ** 2) / np.sum((y_test_original_scale - np.mean(y_test_original_scale)) ** 2))
+log_loss = np.mean(np.log(1 + np.exp(-(y_test_original_scale * 10 - predicted_original_scale * 10))))
+smape = np.mean(2 * np.abs(y_test_original_scale - predicted_original_scale) / (np.abs(y_test_original_scale) + np.abs(predicted_original_scale)))
+print(f'Mean Squared Error: {mse:.4f}')
+print(f'Mean Absolute Error: {mae:.4f}')
+print(f'Mean Absolute Percentage Error: {mape:.4f}%')
+print(f'Root Mean Squared Error: {rmse:.4f}')
+print(f'R-squared: {r2:.4f}')
+print(f'Log Loss: {log_loss:.4f}')
+print(f'Symmetric Mean Absolute Percentage Error: {smape:.4f}')
+import plotly.graph_objs as go
+import plotly.offline as pyo
+
+# 1. 训练损失的交互式可视化
+train_loss_fig = go.Figure()
+
+# 添加训练损失曲线
+train_loss_fig.add_trace(go.Scatter(
+    x=list(range(1, num_epochs + 1)),  # 横坐标是训练的轮数
+    y=train_loss,  # 纵坐标是训练过程中的损失
+    mode='lines',  # 线形显示
+    name='Training Loss',  # 曲线的标签
+    line=dict(color='royalblue', width=3, dash='dash'),  # 设置颜色、宽度和虚线样式
+    marker=dict(symbol='circle', size=6, color='deepskyblue', line=dict(color='darkblue', width=2))  # 数据点样式
+))
+
+# 更新图表的布局
+train_loss_fig.update_layout(
+    title='BPNN:Training Loss Curve',  # 图表标题
+    title_font=dict(size=20, family='Arial', color='black'),  # 设置标题字体
+    xaxis=dict(title='Epoch', title_font=dict(size=14, family='Arial', color='black'), gridcolor='lightgray'),  # X轴标签
+    yaxis=dict(title='Loss', title_font=dict(size=14, family='Arial', color='black'), gridcolor='lightgray'),  # Y轴标签
+    plot_bgcolor='whitesmoke',  # 设置图表背景色
+    paper_bgcolor='whitesmoke',  # 设置图表外部背景色
+    font=dict(family='Arial', size=12, color='black'),  # 字体设置
+    legend=dict(
+        x=0.5, y=1.05,  # 设置图例位置
+        xanchor='center',  # 图例水平居中
+        yanchor='bottom',  # 图例垂直居上
+        traceorder='normal',  # 图例顺序
+        orientation='h',  # 图例显示为水平排列（即一行多列）
+        font=dict(family='Arial', size=12, color='black'),
+        bgcolor='rgba(255, 255, 255, 0.5)',  # 图例背景颜色
+        bordercolor='black', borderwidth=1  # 图例边框颜色和宽度
+    ),
+    showlegend=True,  # 显示图例
+    width=1200,  # 设置图表宽度
+    height=600  # 设置图表高度
+)
+
+# 设置图表边缘的阴影效果
+train_loss_fig.update_layout(
+    xaxis=dict(showgrid=True, zeroline=False, showline=True, linecolor='gray'),  # X轴样式
+    yaxis=dict(showgrid=True, zeroline=False, showline=True, linecolor='gray'),  # Y轴样式
+    margin=dict(l=50, r=50, t=50, b=50)  # 设置图表的边距
+)
+
+train_loss_fig.show()
+
+# 2. 预测与实际结果的交互式可视化
+# 创建实际结果的曲线
+timestep = 100
+actual_trace = go.Scatter(
+    x=list(range(timestep)),  # 横坐标是时间步
+    y=y_test_original_scale[:timestep].flatten(),  # 纵坐标是实际测试数据（前100个数据点）
+    mode='lines+markers',  # 线条和数据点显示
+    name='Actual',  # 曲线名称
+    line=dict(color='forestgreen', width=3, shape='spline'),  # 设置颜色、宽度和曲线类型
+    marker=dict(symbol='circle', size=8, color='limegreen', line=dict(color='darkgreen', width=2))  # 数据点样式
+)
+
+# 创建预测结果的曲线
+predicted_trace = go.Scatter(
+    x=list(range(timestep)),  # 横坐标是时间步
+    y=predicted_original_scale[:timestep].flatten(),  # 纵坐标是模型的预测数据（前100个数据点）
+    mode='lines+markers',  # 线条和数据点显示
+    name='Predicted',  # 曲线名称
+    line=dict(color='firebrick', width=3, dash='dot'),  # 设置颜色、宽度和虚线样式
+    marker=dict(symbol='x', size=8, color='tomato', line=dict(color='darkred', width=2))  # 数据点样式
+)
+
+# 创建包含实际和预测数据的图表
+comparison_fig = go.Figure(data=[actual_trace, predicted_trace])
+
+# 更新布局设置
+comparison_fig.update_layout(
+    title='BPNN:Actual vs Predicted',  # 图表标题
+    title_font=dict(size=20, family='Arial', color='black'),  # 标题字体
+    xaxis=dict(title='Time Step', title_font=dict(size=14, family='Arial', color='black'), gridcolor='lightgray'),  # X轴标签
+    yaxis=dict(title='Load', title_font=dict(size=14, family='Arial', color='black'), gridcolor='lightgray'),  # Y轴标签
+    plot_bgcolor='whitesmoke',  # 图表背景颜色
+    paper_bgcolor='whitesmoke',  # 外部背景颜色
+    font=dict(family='Arial', size=12, color='black'),  # 字体设置
+    legend=dict(
+        x=0.5, y=1.05,  # 设置图例位置
+        xanchor='center',  # 图例水平居中
+        yanchor='bottom',  # 图例垂直居上
+        traceorder='normal',  # 图例顺序
+        orientation='h',  # 图例显示为水平排列（即一行多列）
+        font=dict(family='Arial', size=12, color='black'),
+        bgcolor='rgba(255, 255, 255, 0.5)',  # 图例背景颜色
+        bordercolor='black', borderwidth=1  # 图例边框颜色和宽度
+    ),
+    showlegend=True,  # 显示图例
+    width=1200,  # 设置图表宽度
+    height=600  # 设置图表高度
+)
+
+# 为图表添加渐变背景色
+comparison_fig.update_layout(
+    paper_bgcolor='rgba(240, 240, 240, 0.9)',  # 外部背景渐变色
+    plot_bgcolor='rgba(255, 255, 255, 0.9)',  # 图表区域背景渐变色
+)
+
+# 显示预测与实际结果的图表
+comparison_fig.show()
