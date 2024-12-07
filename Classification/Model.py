@@ -8,7 +8,7 @@ class LSTMWithAttention(nn.Module):
         super(LSTMWithAttention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -32,7 +32,7 @@ class GRUWithAttention(nn.Module):
         super(GRUWithAttention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -58,7 +58,7 @@ class CNN_LSTM(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -82,7 +82,7 @@ class CNN_GRU(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -104,7 +104,7 @@ class LSTM_CNN(nn.Module):
         super(LSTM_CNN, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -128,9 +128,9 @@ class LSTM_BiGRU(nn.Module):
         super(LSTM_BiGRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -150,9 +150,9 @@ class GRU_BiLSTM(nn.Module):
         super(GRU_BiLSTM, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -172,7 +172,7 @@ class LSTM_CNN_Attention(nn.Module):
         super(LSTM_CNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -202,7 +202,7 @@ class GRU_CNN_Attention(nn.Module):
         super(GRU_CNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -232,7 +232,7 @@ class BiLSTM_MultiheadAttention(nn.Module):
         super(BiLSTM_MultiheadAttention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Multihead Attention层用于加权序列中的重要信息
         self.multihead_attn = nn.MultiheadAttention(hidden_dim * 2, num_heads)
@@ -254,7 +254,7 @@ class GRU_TransformerEncoder(nn.Module):
         super(GRU_TransformerEncoder, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -300,7 +300,7 @@ class LSTM_Transformer(nn.Module):
         super(LSTM_Transformer, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -324,7 +324,7 @@ class CNN_RNN(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -351,9 +351,9 @@ class GRU_RNN(nn.Module):
         super(GRU_RNN, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -378,9 +378,9 @@ class LSTM_GRU_Attention(nn.Module):
         super(LSTM_GRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -406,7 +406,7 @@ class LSTM_Dense_Attention(nn.Module):
         super(LSTM_Dense_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -434,7 +434,7 @@ class GRU_Dense_Attention(nn.Module):
         super(GRU_Dense_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -486,7 +486,7 @@ class CNN_RNN_Attention(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -519,9 +519,9 @@ class BiLSTM_GRU(nn.Module):
         super(BiLSTM_GRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim * 2, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -565,11 +565,11 @@ class GRU_CNN_BiLSTM(nn.Module):
         super(GRU_CNN_BiLSTM, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -593,11 +593,11 @@ class LSTM_CNN_GRU(nn.Module):
         super(LSTM_CNN_GRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -621,9 +621,9 @@ class LSTM_RNN_Dense(nn.Module):
         super(LSTM_RNN_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -652,7 +652,7 @@ class GRU_CNN_Dense(nn.Module):
         super(GRU_CNN_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -710,7 +710,7 @@ class LSTM_CNN_Transformer(nn.Module):
         super(LSTM_CNN_Transformer, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -738,7 +738,7 @@ class BiLSTM_CNN_Attention(nn.Module):
         super(BiLSTM_CNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim * 2, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -768,7 +768,7 @@ class GRU_Dense_CNN(nn.Module):
         super(GRU_Dense_CNN, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -796,11 +796,11 @@ class LSTM_CNN_GRU_Attention(nn.Module):
         super(LSTM_CNN_GRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -830,7 +830,7 @@ class LSTM_Transformer_Dense(nn.Module):
         super(LSTM_Transformer_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -856,7 +856,7 @@ class BiLSTM_CNN_Transformer(nn.Module):
         super(BiLSTM_CNN_Transformer, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim * 2, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -884,7 +884,7 @@ class GRU_Transformer_Dense(nn.Module):
         super(GRU_Transformer_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -910,9 +910,9 @@ class LSTM_BiGRU_Attention(nn.Module):
         super(LSTM_BiGRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim * 2, 1)
@@ -940,9 +940,9 @@ class CNN_LSTM_BiLSTM(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -968,9 +968,9 @@ class CNN_LSTM_BiGRU(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -994,11 +994,11 @@ class LSTM_CNN_BiGRU(nn.Module):
         super(LSTM_CNN_BiGRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -1022,9 +1022,9 @@ class LSTM_RNN_Dense(nn.Module):
         super(LSTM_RNN_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -1053,7 +1053,7 @@ class GRU_Transformer_Dense(nn.Module):
         super(GRU_Transformer_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -1079,9 +1079,9 @@ class LSTM_GRU_Transformer(nn.Module):
         super(LSTM_GRU_Transformer, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -1105,11 +1105,11 @@ class LSTM_CNN_RNN(nn.Module):
         super(LSTM_CNN_RNN, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -1138,9 +1138,9 @@ class LSTM_BiLSTM_Transformer(nn.Module):
         super(LSTM_BiLSTM_Transformer, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim * 2, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -1194,11 +1194,11 @@ class LSTM_CNN_RNN_Attention(nn.Module):
         super(LSTM_CNN_RNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -1233,11 +1233,11 @@ class LSTM_CNN_BiLSTM_Attention(nn.Module):
         super(LSTM_CNN_BiLSTM_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim * 2, 1)
@@ -1267,11 +1267,11 @@ class GRU_CNN_BiLSTM_Attention(nn.Module):
         super(GRU_CNN_BiLSTM_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim * 2, 1)
@@ -1303,9 +1303,9 @@ class CNN_BiLSTM_GRU_Attention(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim * 2, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -1337,7 +1337,7 @@ class Transformer_BiGRU(nn.Module):
         self.num_layers = num_layers
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -1357,7 +1357,7 @@ class LSTM_Dense_CNN_Attention(nn.Module):
         super(LSTM_Dense_CNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -1391,11 +1391,11 @@ class GRU_CNN_BiLSTM_Attention(nn.Module):
         super(GRU_CNN_BiLSTM_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim * 2, 1)
@@ -1425,11 +1425,11 @@ class BiLSTM_CNN_GRU_Dense(nn.Module):
         super(BiLSTM_CNN_GRU_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim * 2, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -1457,11 +1457,11 @@ class LSTM_Transformer_GRU(nn.Module):
         super(LSTM_Transformer_GRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -1485,7 +1485,7 @@ class CNN_RNN_Transformer(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # RNN层用于处理序列数据，捕捉时间序列中的依赖关系
+        # RNN层用于处理序列数据,捕捉时间序列中的依赖关系
         if rnn_type == 'LSTM':
             self.rnn = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
         elif rnn_type == 'GRU':
@@ -1516,7 +1516,7 @@ class GRU_CNN_Dense(nn.Module):
         super(GRU_CNN_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -1544,7 +1544,7 @@ class BiLSTM_CNN_Dense_Attention(nn.Module):
         super(BiLSTM_CNN_Dense_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim * 2, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -1578,11 +1578,11 @@ class LSTM_Transformer_GRU(nn.Module):
         super(LSTM_Transformer_GRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -1606,7 +1606,7 @@ class CNN_GRU_Attention_Dense(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -1638,9 +1638,9 @@ class BiLSTM_GRU_Attention(nn.Module):
         super(BiLSTM_GRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim * 2, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -1666,11 +1666,11 @@ class LSTM_CNN_GRU_Dense(nn.Module):
         super(LSTM_CNN_GRU_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -1698,9 +1698,9 @@ class LSTM_GRU_CNN_Attention(nn.Module):
         super(LSTM_GRU_CNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -1732,13 +1732,13 @@ class LSTM_GRU_CNN_BiGRU(nn.Module):
         super(LSTM_GRU_CNN_BiGRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -1764,7 +1764,7 @@ class GRU_Transformer_Dense(nn.Module):
         super(GRU_Transformer_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -1790,11 +1790,11 @@ class LSTM_CNN_BiGRU_Dense(nn.Module):
         super(LSTM_CNN_BiGRU_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim * 2, hidden_dim)
@@ -1824,7 +1824,7 @@ class CNN_GRU_Transformer_Dense(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -1854,9 +1854,9 @@ class BiLSTM_GRU_Attention(nn.Module):
         super(BiLSTM_GRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim * 2, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -1882,9 +1882,9 @@ class LSTM_GRU_CNN_Attention(nn.Module):
         super(LSTM_GRU_CNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -1920,9 +1920,9 @@ class Transformer_CNN_BiLSTM_GRU(nn.Module):
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim * 2, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -1948,13 +1948,13 @@ class LSTM_Dense_Transformer_GRU(nn.Module):
         super(LSTM_Dense_Transformer_GRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -1978,9 +1978,9 @@ class GRU_BiGRU_Attention(nn.Module):
         super(GRU_BiGRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim * 2, 1)
@@ -2006,13 +2006,13 @@ class LSTM_CNN_GRU_BiGRU(nn.Module):
         super(LSTM_CNN_GRU_BiGRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -2038,9 +2038,9 @@ class LSTM_GRU_CNN_Attention(nn.Module):
         super(LSTM_GRU_CNN_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -2076,7 +2076,7 @@ class CNN_Transformer_BiLSTM_Dense(nn.Module):
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=filters, nhead=num_heads, dim_feedforward=dim_feedforward)
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim * 2, hidden_dim)
@@ -2104,11 +2104,11 @@ class GRU_CNN_BiGRU_Attention(nn.Module):
         super(GRU_CNN_BiGRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim * 2, 1)
@@ -2138,9 +2138,9 @@ class LSTM_GRU_Transformer_Attention(nn.Module):
         super(LSTM_GRU_Transformer_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -2172,7 +2172,7 @@ class CNN_GRU_Transformer_Attention(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -2204,7 +2204,7 @@ class BiLSTM_Transformer_Dense(nn.Module):
         super(BiLSTM_Transformer_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim * 2, nhead=num_heads, dim_feedforward=dim_feedforward)
@@ -2230,13 +2230,13 @@ class LSTM_GRU_CNN_BiGRU(nn.Module):
         super(LSTM_GRU_CNN_BiGRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # 全连接层用于最终的分类或回归任务
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
@@ -2262,7 +2262,7 @@ class GRU_CNN_Attention_Dense(nn.Module):
         super(GRU_CNN_Attention_Dense, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(hidden_dim, filters, kernel_size, padding=(kernel_size-1)//2)
@@ -2296,9 +2296,9 @@ class LSTM_BiGRU_Attention(nn.Module):
         super(LSTM_BiGRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
-        # Bi-directional GRU层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional GRU层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bigru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim * 2, 1)
@@ -2326,9 +2326,9 @@ class CNN_LSTM_GRU_Dense(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(filters, hidden_dim, num_layers, batch_first=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -2356,9 +2356,9 @@ class BiLSTM_GRU_Attention(nn.Module):
         super(BiLSTM_GRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim * 2, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -2386,7 +2386,7 @@ class Transformer_LSTM_Dense_Attention(nn.Module):
         self.num_layers = num_layers
         # Transformer Encoder层用于处理全局信息
         self.transformer_encoder = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=dim_feedforward)
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -2418,7 +2418,7 @@ class CNN_GRU_Dense(nn.Module):
         self.num_layers = num_layers
         # CNN层用于提取局部特征
         self.conv = nn.Conv1d(input_dim, filters, kernel_size, padding=(kernel_size-1)//2)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(filters, hidden_dim, num_layers, batch_first=True)
         # Dense层用于特征映射
         self.dense = nn.Linear(hidden_dim, hidden_dim)
@@ -2444,9 +2444,9 @@ class BiLSTM_GRU_Attention(nn.Module):
         super(BiLSTM_GRU_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # Bi-directional LSTM层用于处理序列数据，捕捉时间序列中的双向依赖关系
+        # Bi-directional LSTM层用于处理序列数据,捕捉时间序列中的双向依赖关系
         self.bilstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True, bidirectional=True)
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(hidden_dim * 2, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -2472,9 +2472,9 @@ class GRU_LSTM_Attention(nn.Module):
         super(GRU_LSTM_Attention, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        # GRU层用于处理序列数据，捕捉时间序列中的依赖关系
+        # GRU层用于处理序列数据,捕捉时间序列中的依赖关系
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
-        # LSTM层用于处理序列数据，捕捉时间序列中的依赖关系
+        # LSTM层用于处理序列数据,捕捉时间序列中的依赖关系
         self.lstm = nn.LSTM(hidden_dim, hidden_dim, num_layers, batch_first=True)
         # Attention层用于加权序列中的重要信息
         self.attention = nn.Linear(hidden_dim, 1)
@@ -2499,7 +2499,7 @@ class GRU_LSTM_Attention(nn.Module):
 class CNN_LSTM_Dense_Attention(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim, nhead, num_layers):
         """
-        结合Transformer、LSTM、Dense层和多头注意力机制的时间序列预测模型。
+        结合Transformer、LSTM、Dense层和多头注意力机制的时间序列预测模型. 
         
         参数:
             input_dim (int): 输入维度
@@ -2528,10 +2528,10 @@ class CNN_LSTM_Dense_Attention(nn.Module):
         前向传播
         
         参数:
-            x (torch.Tensor): 输入数据，形状为 (batch_size, sequence_length, input_dim)
+            x (torch.Tensor): 输入数据,形状为 (batch_size, sequence_length, input_dim)
             
         返回:
-            out (torch.Tensor): 输出，形状为 (batch_size, sequence_length, output_dim)
+            out (torch.Tensor): 输出,形状为 (batch_size, sequence_length, output_dim)
         """
         # Transformer编码器
         x_transformer = x.permute(1, 0, 2)
