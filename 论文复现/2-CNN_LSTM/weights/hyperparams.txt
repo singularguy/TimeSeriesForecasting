@@ -1,0 +1,1 @@
+input_dim: 1/nhidden_dim: 32/noutput_dim: 1/nnum_layers: 1/nnum_epochs: 1000/nlearning_rate: 0.002/n

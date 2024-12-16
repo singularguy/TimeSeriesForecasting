@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>创新点.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script>
+  <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ol>
+<li>
+<p><strong>多时间尺度调度框架</strong>:</p>
+<ul>
+<li><strong>创新点</strong>:提出了一个涵盖<strong>日前</strong>、<strong>日内</strong>和<strong>实时</strong>三个时间尺度的调度框架,实现了多能源介质的高效协同利用.</li>
+<li><strong>具体实现</strong>:<strong>日前调度</strong>以系统经济性为目标,<strong>日内调度</strong>引入管网和电力约束,<strong>实时调度</strong>采用
+<strong>MPC</strong>进行修正,确保能源系统的日平衡、实时平衡和设备动态调整.</li>
+</ul>
+</li>
+<li>
+<p><strong>分布式优化调度框架</strong>:</p>
+<ul>
+<li><strong>创新点</strong>:通过<strong>分布式优化方法</strong>,解决了集中式建模导致的变量维度爆炸问题.</li>
+<li><strong>具体实现</strong>:将系统拆分为多个主体,通过<strong>共识变量</strong>进行信息交互和协调,确保全局的一致性和各主体间的协同优化.具体应用了<strong>ADMM(Alternating Direction Method of Multipliers)<strong>算法,并通过</strong>JP-ADMM算法</strong>改进了标准ADMM的收敛性问题.
+<ul>
+<li>
+<p><strong>公式</strong>:</p>
+<p>[
+L_S(x_s) = f_s(A_s x_s) + \epsilon \left( A_s x_s + \sum_{j \in \mathcal{N}<em>s} \phi</em>{sj} x_j - C - \pi_s^{(k)} \right)^2 + \frac{\rho}{2} \left| A_s x_s + \sum_{j \in \mathcal{N}<em>s} \phi</em>{sj} x_j - C \right|^2
+]</p>
+<p>其中,(\pi_s^{(k)}) 和 (\rho) 为<strong>拉格朗日罚函数因子</strong>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>改进的SAC算法</strong>:</p>
+<ul>
+<li><strong>创新点</strong>:设计了一种改进的<strong>SAC(Soft Actor-Critic)<strong>算法,将分布式算法求解过程中变量的迭代过程视作</strong>马尔可夫随机过程</strong>并学习其分布,进而提升求解效率.</li>
+</ul>
+</li>
+<li>
+<p><strong>模型预测控制(MPC)的应用</strong>:</p>
+<ul>
+<li><strong>创新点</strong>:在<strong>实时阶段</strong>采用MPC对设备出力进行修正,确保生产系统能够灵活应对变化,持续优化生产调度.</li>
+<li><strong>具体实现</strong>:MPC能够实时更新系统状态,根据实际运行数据和用户负荷的实时变化,判断设备能否达到日内模型给出的设备出力设定值,并进行必要的调整.
+<ul>
+<li>
+<p><strong>公式</strong>:</p>
+<p>[
+\begin{cases}
+\min_{x_N} x_N^T Q_N x_N + \sum_{k=0}^{N-1} x_k^T Q_k x_k + \sum_{k=0}^{N-1} u_k^T R u_k \
+\text{s.t. } x_{k+1} = A x_k + B u_k \
+\forall k \in {0,1,\ldots,N-1}
+\end{cases}
+]</p>
+<p>其中,(A) 和 (B) 为设备的状态转移矩阵,(x_N) 对应设备最终状态,(x_r) 对应日内调度量.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>复杂约束的处理</strong>:</p>
+<ul>
+<li><strong>创新点</strong>:<strong>日内模型</strong>引入了更为细致的管网约束和配电网的潮流约束,提升了模型的实际适用性和精确度.</li>
+<li><strong>具体实现</strong>:通过<strong>分段线性化(PWL)</strong> 处理非线性约束,提高了计算精度.
+<ul>
+<li>
+<p><strong>公式</strong>:
+[
+F_{k-n}^2 = c_{k-n}^2 (u_k - u_n)
+]</p>
+<p>[
+F_{k-n}^2 = \sum_{l=1}^{N} (f_{k-n}^l \cdot e_{k-n}^l + A_{k-n}^l \cdot \delta_{k-n}^l)
+]</p>
+<p>其中,(F_{k-n}) 为管道流量,(c_{k-n}) 为管道参数,(u_k) 和 (u_n) 为管道两侧的压力平方.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>基于CNN-LSTM-Attention的负荷预测模型</strong>:
+文章的创新点主要体现在以下几个方面:</p>
+<ul>
+<li>
+<p><strong>模型架构创新</strong>:提出了结合<strong>卷积神经网络(CNN)</strong>、<strong>LSTM</strong>和<strong>Attention Mechanism</strong>的混合模型(CNN-LSTM-A),用于短期电力负荷预测.该模型通过CNN提取高维特征,LSTM捕捉时间序列的相关性,并通过注意力机制优化LSTM输出的权重,从而提高预测精度.</p>
+</li>
+<li>
+<p><strong>特征提取与选择</strong>:使用<strong>Pearson相关系数(PCC)</strong> 方法对输入特征进行筛选,选择与目标负荷高度相关的特征作为模型输入.公式表示为:</p>
+<p>[
+r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
+]</p>
+<p>其中,( r_{xy} ) 表示变量 ( X ) 和 ( Y ) 之间的<strong>PCC</strong>,( \bar{x} ) 和 ( \bar{y} ) 分别表示变量 ( X ) 和 ( Y ) 的均值.</p>
+</li>
+<li>
+<p><strong>注意力机制的应用</strong>:引入<strong>注意力机制</strong>来优化LSTM的输出权重,使得模型能够更好地关注关键信息,减少信息损失.
+注意力机制的权重计算公式为:
+[
+e_t = u \tanh(w h_t + b)
+]</p>
+<p>[
+a_t = \frac{\exp(e_t)}{\sum_{j=1}^{t} \exp(e_j)}
+]</p>
+<p>[
+s_t = \sum_{i=1}^{t} a_i h_t
+]</p>
+<p>其中,( e_t ) 是<strong>注意力得分函数</strong>,( a_t ) 是<strong>注意力概率分布</strong>,( s_t ) 是注意力层的输出.</p>
+</li>
+</ul>
+</li>
+</ol>
+
+</body>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+          }
+      });
+  </script>
+</html>
